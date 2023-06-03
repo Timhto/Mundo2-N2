@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Catálogo de Receitas</title>
+
+    <!-- Incluindo o arquivo CSS do Bootstrap -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="receitas.css">
+
+    <!-- Incluindo o arquivo JS do Bootstrap -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+        
+    <style>
+        .container-fluid {
+            background-color: #ffc107;
+        }
+
+        .pnlCatalogo {
+            display: flex;
+            flex-wrap: wrap;
+        }
+    </style>
+</head>
+
+<body onload="preencheCatalogo()">
+    <!-- Área principal -->
+    <div class="container-fluid">
+        <h1>Catálogo de Receitas</h1>
+        <!-- Div para apresentação dos painéis para as receitas -->
+        <div class="pnlCatalogo" id="pnlCatalogo">
+
+
+
+        </div>
+    </div>
+    <script>
+        const receitas = [
+            {
+                titulo: "Bolo de Cenoura",
+                imagem: "bolo de cenoura.jpg",
+                preparo: "Bata no liquidificador os ovos, as cenouras e o óleo. Em seguida, misture em uma tigela a farinha de trigo, o açúcar e o fermento em pó. Adicione a mistura do liquidificador à tigela e misture bem. Despeje em uma forma untada e leve ao forno pré-aquecido a 180°C por cerca de 40 minutos.",
+                ingredientes: [
+                    "3 ovos",
+                    "2 cenouras",
+                    "1 xícara de óleo",
+                    "2 xícaras de açúcar",
+                    "2 xícaras de farinha de trigo",
+                    "1 colher de sopa de fermento em pó"
+                ]
+            },
+            {
+                titulo: "Lasanha de Frango com Molho Branco",
+                imagem: "torta de frango.jpg",
+                preparo: "Para o molho branco, derreta a manteiga em uma panela e adicione a farinha de trigo. Mexa bem e adicione o leite, mexendo sem parar até obter um creme liso. Tempere com sal, noz-moscada e pimenta-do-reino. Cozinhe o frango com água e sal até ficar macio. Desfie e reserve. Cozinhe a massa da lasanha em água fervente com sal e um pouco de óleo. Reserve. Em um refratário, faça camadas de massa, molho branco, frango desfiado e queijo mussarela ralado. Repita as camadas até terminarem os ingredientes. Finalize com molho branco e queijo ralado por cima. Leve ao forno preaquecido a 200°C por cerca de 30 minutos ou até gratinar.",
+                ingredientes: [
+                    "1 pacote de massa de lasanha",
+                    "500g de peito de frango",
+                    "1 litro de leite",
+                    "4 colheres de sopa de manteiga",
+                    "4 colheres de sopa de farinha de trigo",
+                    "200g de queijo mussarela ralado",
+                    "sal, noz-moscada e pimenta-do-reino a gosto"
+                ]
+            },
+
+            {
+                titulo: "Lasanha à bolonhesa",
+                imagem: "lasanha a bolonhesa.jpg",
+                ingredientes: [
+                    "500g de massa de lasanha pré-cozida",
+                    "1kg de carne moída",
+                    "2 latas de molho de tomate",
+                    "1 cebola média picada",
+                    "2 dentes de alho picados",
+                    "1 colher de sopa de azeite",
+                    "Sal e pimenta-do-reino a gosto",
+                    "2 xícaras de chá de leite",
+                    "2 colheres de sopa de amido de milho",
+                    "1 caixinha de creme de leite",
+                    "1 xícara de chá de queijo parmesão ralado"
+                ],
+                "preparo": "1. Em uma panela, aqueça o azeite e refogue a cebola e o alho. Adicione a carne moída e refogue até dourar. Tempere com sal e pimenta a gosto.\n2. Adicione o molho de tomate e deixe cozinhar por alguns minutos. Reserve.\n3. Em outra panela, prepare o molho branco. Misture o leite e o amido de milho e leve ao fogo baixo, mexendo sempre, até engrossar.\n4. Desligue o fogo e acrescente o creme de leite e metade do queijo parmesão. Misture bem.\n5. Em uma travessa, monte a lasanha. Comece com uma camada de molho bolonhesa, uma camada de massa de lasanha, uma camada de molho branco e repita até acabarem os ingredientes.\n6. Finalize com uma camada de molho branco e polvilhe o restante do queijo parmesão por cima.\n7. Leve ao forno preaquecido a 180°C por cerca de 40 minutos, ou até que a lasanha esteja gratinada e cozida."
+            }
+
+        ];
+        function getListaIngredientes(ingredientes) {
+            let lista = "<ul>";
+            for (let i = 0; i < ingredientes.length; i++) {
+                lista += "<li>" + ingredientes[i] + "</li>";
+            }
+            lista += "</ul>";
+            return lista;
+        }
+
+        function getCard(receita) {
+            return `
+    <div class="card-wrapper">
+      <div class="card" style="width: 250px;">
+        <img src="${receita.imagem}" class="card-img-top" alt="${receita.titulo}">
+        <div class="card-body">
+          <h5 class="card-title">${receita.titulo}</h5>
+          <div class="card-text">
+            ${getListaIngredientes(receita.ingredientes)}
+            <hr>
+            <p>${receita.preparo}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  `;
+        }
+
+
+        function preencheCatalogo() {
+            let pnlCatalogo = document.getElementById("pnlCatalogo");
+            for (let i = 0; i < receitas.length; i++) {
+                pnlCatalogo.innerHTML += getCard(receitas[i]);
+            }
+        }
+
+        function getListaIngredientes(receita) {
+            const listaIngredientes = receita.ingredientes
+                .map(ingrediente => `<li>${ingrediente}</li>`)
+                .reduce((acc, cur) => acc + cur, "");
+
+            return `<ul>${listaIngredientes}</ul>`;
+        }
+        function getCard(receita) {
+            const listaIngredientes = getListaIngredientes(receita);
+
+            return `
+    <div class="card" style="width: 250px;">
+      <img src="${receita.imagem}" class="card-img-top" alt="${receita.titulo}">
+      <div class="card-body">
+        <h5 class="card-title">${receita.titulo}</h5>
+        <div class="card-text">
+          ${listaIngredientes}
+          <hr>
+          <p>${receita.preparo}</p>
+        </div>
+      </div>
+    </div>
+  `;
+        }
+
+        function preencheCatalogo() {
+            const pnlCatalogo = document.getElementById("pnlCatalogo");
+            const receitasHTML = receitas.map(receita => getCard(receita)).reduce((acc, cur) => acc + cur, "");
+            pnlCatalogo.innerHTML = receitasHTML;
+        }
+
+
+
+
+
+
+    </script>
+</body>
+
+</html>

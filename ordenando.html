@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="UTF-8" />
+  <title>Ordenando Valores</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="ordenando.css" />
+</head>
+
+<body>
+  <div id="app" class="d-flex align-items-center justify-content-center">
+    <div class="container">
+      <!-- Campo de entrada numérico -->
+      <div class="form-group">
+        <label for="valor">Valor:</label>
+        <input type="number" id="novo-valor" class="form-control" />
+      </div>
+      <!-- Botão para adicionar valor -->
+      <button id="adicionar-valor" class="btn btn-success">Adicionar</button>
+      <br /><br />
+      <!-- Campo de seleção de algoritmo de ordenação -->
+      <div class="form-group">
+        <label for="algoritmo">Algoritmo:</label>
+        <select id="algoritmo" class="form-control">
+          <option value="bubble">Bubble Sort</option>
+          <option value="selection">Selection Sort</option>
+          <option value="quick">Quick Sort</option>
+        </select>
+      </div>
+      <!-- Botão para ordenar valores -->
+      <button id="ordenar-valores" class="btn btn-primary">Ordenar</button>
+      <!-- Botão para misturar valores -->
+      <button id="misturar-valores" class="btn btn-primary">Misturar</button>
+      <br /><br />
+      <!-- Lista de valores -->
+      <ul id="valores-lista"></ul>
+    </div>
+  </div>
+
+  <script src="ordenando.js"></script>
+
+  <script>function shuffle(array) {
+      for (let i = array.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]];
+      }
+      return array;
+    }
+  </script>
+  <script>function bubble_sort(array) {
+      const len = array.length;
+      for (let i = 0; i < len; i++) {
+        for (let j = 0; j < len - 1 - i; j++) {
+          if (array[j] > array[j + 1]) {
+            // Swap
+            const temp = array[j];
+            array[j] = array[j + 1];
+            array[j + 1] = temp;
+          }
+        }
+      }
+    }
+  </script>
+  <script>function selectionSort(arr) {
+      for (let i = 0; i < arr.length - 1; i++) {
+        let minIndex = i;
+        for (let j = i + 1; j < arr.length; j++) {
+          if (arr[j] < arr[minIndex]) {
+            minIndex = j;
+          }
+        }
+        if (minIndex !== i) {
+          [arr[i], arr[minIndex]] = [arr[minIndex], arr[i]];
+        }
+      }
+    }
+
+    function quickSort(arr, left, right) {
+      if (left < right) {
+        let pivotIndex = partition(arr, left, right);
+        quickSort(arr, left, pivotIndex - 1);
+        quickSort(arr, pivotIndex + 1, right);
+      }
+    }
+
+    function partition(arr, left, right) {
+      let pivotIndex = Math.floor((left + right) / 2);
+      let pivotValue = arr[pivotIndex];
+      let i = left;
+      let j = right;
+      while (i <= j) {
+        while (arr[i] < pivotValue) {
+          i++;
+        }
+        while (arr[j] > pivotValue) {
+          j--;
+        }
+        if (i <= j) {
+          [arr[i], arr[j]] = [arr[j], arr[i]];
+          i++;
+          j--;
+        }
+      }
+      return i;
+    }
+  </script>
+</body>
+
+</html>
